@@ -1,0 +1,42 @@
+project:
+  name: pothole-dfine-orin
+  task: detection
+  safety_critical: true
+
+model:
+  architecture: dfine
+  backbone: hgnetv2
+  num_classes: 2
+  input_size: [640, 640]
+  deploy:
+    tensorrt_compatible: true
+    fp16: true
+    int8: true
+
+loss:
+  type: vfocal
+  vfocal_alpha: 0.9
+  vfocal_gamma: 2.0
+  class_weight: [1.0, 4.5]
+  lambda_cls: 3.5
+  lambda_bbox: 1.0
+  lambda_giou: 0.0
+
+train:
+  epochs: 80
+  batch_size: 16
+  lr: 0.0002
+  weight_decay: 0.0001
+  max_norm: 0.1
+  output_dir: /content/pothole-dfine/outputs
+  num_workers: 2
+
+data:
+  train_json: /content/dataset/annotations/instances_train.json
+  val_json: /content/dataset/annotations/instances_val.json
+  images_root: /content/dataset/images
+
+runtime:
+  device: cuda
+  single_gpu: true
+  deterministic: false

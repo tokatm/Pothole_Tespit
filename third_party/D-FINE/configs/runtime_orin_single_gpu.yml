@@ -1,0 +1,21 @@
+print_freq: 50
+output_dir: '/content/pothole-dfine/outputs'
+checkpoint_freq: 5
+
+sync_bn: False
+find_unused_parameters: False
+
+use_amp: True
+scaler:
+  type: GradScaler
+  enabled: True
+
+use_ema: True
+ema:
+  type: ModelEMA
+  decay: 0.9999
+  warmups: 1000
+
+use_wandb: False
+project_name: pothole-dfine
+exp_name: orin-single-gpu

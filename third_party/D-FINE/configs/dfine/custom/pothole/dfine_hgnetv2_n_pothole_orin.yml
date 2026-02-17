@@ -1,0 +1,79 @@
+__include__: [
+  '../../../dataset/pothole_detection_colab.yml',
+  '../../../runtime_orin_single_gpu.yml',
+  '../../include/dataloader.yml',
+  '../../include/optimizer.yml',
+  '../../include/dfine_hgnetv2.yml',
+]
+
+output_dir: /content/pothole-dfine/outputs/dfine_hgnetv2_n_pothole_orin
+
+project_name: pothole-dfine
+exp_name: hgnetv2_n_orin_recall
+
+use_amp: True
+use_ema: True
+
+DFINE:
+  backbone: HGNetv2
+
+HGNetv2:
+  name: 'B0'
+  return_idx: [2, 3]
+  freeze_at: -1
+  freeze_norm: False
+  use_lab: True
+
+HybridEncoder:
+  in_channels: [512, 1024]
+  feat_strides: [16, 32]
+  hidden_dim: 128
+  use_encoder_idx: [1]
+  dim_feedforward: 512
+  expansion: 0.34
+  depth_mult: 0.5
+
+DFINETransformer:
+  feat_channels: [128, 128]
+  feat_strides: [16, 32]
+  hidden_dim: 128
+  dim_feedforward: 512
+  num_levels: 2
+  num_layers: 3
+  eval_idx: -1
+  num_points: [6, 6]
+
+DFINECriterion:
+  losses: ['vfl', 'boxes', 'local']
+  alpha: 0.9
+  gamma: 2.0
+  class_weight: [4.0]
+  weight_dict: {loss_vfl: 2.5, loss_bbox: 5.0, loss_giou: 2.0, loss_fgl: 0.15, loss_ddf: 1.5}
+
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 4.0, cost_bbox: 5.0, cost_giou: 2.0}
+    alpha: 0.25
+    gamma: 2.0
+
+epochs: 120
+clip_max_norm: 0.1
+print_freq: 50
+checkpoint_freq: 5
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 2
+  collate_fn:
+    stop_epoch: 100
+    ema_restart_decay: 0.9999
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 2
+
+optimizer:
+  type: AdamW
+  lr: 0.0006
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
