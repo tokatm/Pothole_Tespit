@@ -25,7 +25,7 @@
   - COCO'da `category_id=1` olarak yazilir.
 
 ## 5) Colab Operasyon Akisi
-1. Proje klasorunu `/content/pothole-dfine` altina yukle/kopyala.
+1. Proje klasorunu `/content/Pothole_Tespit` altina yukle/kopyala.
 2. `scripts/colab_bootstrap.sh` ile ortam ve path hazirla.
 3. `tools/yolo_to_coco_split.py` ile dataset donusumunu calistir.
 4. D-FINE train (`third_party/D-FINE/train.py`).

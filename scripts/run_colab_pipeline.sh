@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_ROOT="/content/pothole-dfine"
+PROJECT_ROOT="/content/Pothole_Tespit"
 
 cd "${PROJECT_ROOT}"
 bash scripts/colab_bootstrap.sh

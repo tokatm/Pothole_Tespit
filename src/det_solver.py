@@ -93,5 +93,5 @@ def load_solver_config(config_path: str) -> SolverConfig:
         lr=float(train.get('lr', 2e-4)),
         weight_decay=float(train.get('weight_decay', 1e-4)),
         max_norm=float(train.get('max_norm', 0.1)),
-        output_dir=str(train.get('output_dir', '/content/pothole-dfine/outputs')),
+        output_dir=str(train.get('output_dir', '/content/Pothole_Tespit/outputs')),
     )

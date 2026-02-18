@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main() -> None:
-    base = Path('/content/pothole-dfine')
+    base = Path('/content/Pothole_Tespit')
     dirs = [
         base,
         base / 'third_party',

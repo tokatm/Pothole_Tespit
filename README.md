@@ -19,21 +19,21 @@ Bu klasor, resmi D-FINE reposu (`third_party/D-FINE`) uzerine ticari urun odakli
   - `scripts/train_colab.sh`
   - `scripts/export_onnx_orin.sh`
 
-## Colab Setup Hucresi (`/content/pothole-dfine`)
+## Colab Setup Hucresi (`/content/Pothole_Tespit`)
 ```python
 from google.colab import drive
 drive.mount('/content/drive')
 
-# Proje klasorunu Drive'dan /content/pothole-dfine altina kopyalayin
-# Ornek: !cp -r /content/drive/MyDrive/pothole-dfine /content/pothole-dfine
+# Proje klasorunu Drive'dan /content/Pothole_Tespit altina kopyalayin
+# Ornek: !cp -r /content/drive/MyDrive/pothole-dfine /content/Pothole_Tespit
 
-%cd /content/pothole-dfine
+%cd /content/Pothole_Tespit
 !bash scripts/colab_bootstrap.sh
 ```
 
 ## YOLO -> COCO Donusumu
 ```bash
-cd /content/pothole-dfine
+cd /content/Pothole_Tespit
 python tools/yolo_to_coco_split.py \
   --labels-dir /content/dataset/labels \
   --images-dir /content/dataset/images \
@@ -44,13 +44,13 @@ python tools/yolo_to_coco_split.py \
 
 ## Egitim
 ```bash
-cd /content/pothole-dfine
+cd /content/Pothole_Tespit
 bash scripts/train_colab.sh
 ```
 
 ## ONNX Export (Jetson Orin)
 ```bash
-cd /content/pothole-dfine
+cd /content/Pothole_Tespit
 bash scripts/export_onnx_orin.sh
 ```
 
