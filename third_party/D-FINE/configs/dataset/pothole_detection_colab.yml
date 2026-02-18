@@ -27,7 +27,7 @@ val_dataloader:
   type: DataLoader
   dataset:
     type: CocoDetection
-    img_folder: /content/dataset/images/val
+    img_folder: /content/dataset/combined_dataset/images/val
     ann_file: /content/dataset/annotations/instances_val.json
     return_masks: False
     transforms:
