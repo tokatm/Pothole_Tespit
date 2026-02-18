@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_ROOT="/content/Pothole-Tespit"
+PROJECT_ROOT="/content/Pothole_Tespit"
 DFINE_ROOT="${PROJECT_ROOT}/third_party/D-FINE"
 
 if [[ ! -d "${PROJECT_ROOT}" ]]; then
