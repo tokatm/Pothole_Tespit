@@ -13,7 +13,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument('--labels-dir', type=str, required=True)
     p.add_argument('--images-dir', type=str, required=True)
     p.add_argument('--output-json', type=str, required=True)
-    p.add_argument('--class-names', nargs='*', default=['background', 'pothole'])
+    p.add_argument('--class-names', nargs='*', default=['pothole'])
     p.add_argument('--default-ext', type=str, default='jpg')
     return p.parse_args()
 
@@ -69,13 +69,17 @@ def main() -> None:
         )
 
         with open(label_file, 'r', encoding='utf-8') as f:
-            for line in f:
+            for line_no, line in enumerate(f, start=1):
                 parts = line.strip().split()
                 if len(parts) != 5:
                     continue
 
-                # YOLO siniflari genelde 0'dan baslar. 0'i background icin ayirdigimizdan +1 offset uygula.
-                cls = float(parts[0]) + 1
+                cls = int(float(parts[0]))
+                if cls < 0 or cls >= len(categories):
+                    raise ValueError(
+                        f'Invalid class id {cls} in {label_file}:{line_no}. '
+                        f'Check --class-names (count={len(categories)}).'
+                    )
                 xc, yc, w, h = map(float, parts[1:])
                 x, y, bw, bh = yolo_to_coco_bbox(xc, yc, w, h, img_w, img_h)
 
