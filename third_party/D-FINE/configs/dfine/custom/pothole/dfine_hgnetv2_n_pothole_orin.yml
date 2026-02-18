@@ -42,10 +42,11 @@ DFINETransformer:
   num_layers: 3
   eval_idx: -1
   num_points: [6, 6]
+  num_queries: 300
 
 DFINECriterion:
   losses: ['vfl', 'boxes', 'local']
-  alpha: 0.9
+  alpha: 0.75
   gamma: 2.0
   class_weight: [4.0]
   weight_dict: {loss_vfl: 2.5, loss_bbox: 5.0, loss_giou: 2.0, loss_fgl: 0.15, loss_ddf: 1.5}
@@ -55,6 +56,9 @@ DFINECriterion:
     weight_dict: {cost_class: 4.0, cost_bbox: 5.0, cost_giou: 2.0}
     alpha: 0.25
     gamma: 2.0
+
+DFINEPostProcessor:
+  num_top_queries: 300
 
 epochs: 120
 clip_max_norm: 0.1
