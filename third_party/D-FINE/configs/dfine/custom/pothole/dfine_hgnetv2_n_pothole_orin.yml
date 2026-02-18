@@ -45,9 +45,8 @@ DFINETransformer:
 
 DFINECriterion:
   losses: ['vfl', 'boxes', 'local']
-  alpha: 0.9
+  alpha: 0.75
   gamma: 2.0
-  class_weight: [4.0]
   weight_dict: {loss_vfl: 2.5, loss_bbox: 5.0, loss_giou: 2.0, loss_fgl: 0.15, loss_ddf: 1.5}
 
   matcher:
