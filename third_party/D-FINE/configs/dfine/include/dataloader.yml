@@ -5,7 +5,6 @@ train_dataloader:
       ops:
         - {type: RandomPhotometricDistort, p: 0.5}
         - {type: RandomZoomOut, fill: 0}
-        - {type: RandomIoUCrop, p: 0.8}
         - {type: SanitizeBoundingBoxes, min_size: 1}
         - {type: RandomHorizontalFlip}
         - {type: Resize, size: [640, 640], }
@@ -15,7 +14,7 @@ train_dataloader:
       policy:
         name: stop_epoch
         epoch: 72 # epoch in [71, ~) stop `ops`
-        ops: ['RandomPhotometricDistort', 'RandomZoomOut', 'RandomIoUCrop']
+        ops: ['RandomPhotometricDistort', 'RandomZoomOut']
 
   collate_fn:
     type: BatchImageCollateFunction
